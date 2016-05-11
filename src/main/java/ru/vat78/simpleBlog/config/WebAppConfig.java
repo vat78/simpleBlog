@@ -1,0 +1,12 @@
+package ru.vat78.simpleBlog.config;
+
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
+@Configuration
+@EnableWebMvc
+@ComponentScan("ru.vat78.simpleBlog")
+public class WebAppConfig extends WebMvcConfigurerAdapter {
+}
