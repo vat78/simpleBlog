@@ -6,7 +6,7 @@ import java.util.Date;
  * Base class for handle blog posts
  * Created by vat on 12.05.16.
  */
-public class Post {
+public abstract class Post {
 
     private String title;
 
