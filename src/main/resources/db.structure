@@ -1,0 +1,15 @@
+CREATE TABLE `users` (
+  `id` INT NOT NULL,
+  `name` VARCHAR(50) NOT NULL,
+  `password` VARCHAR(50) NOT NULL,
+  `full_name` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `name_UNIQUE` (`name` ASC));
+
+  CREATE TABLE `posts` (
+  `id` INT NOT NULL,
+  `title` VARCHAR(50) NOT NULL,
+  `user_id` INT NOT NULL,
+  `text` TEXT NULL,
+  `created_on` DATETIME NOT NULL,
+  PRIMARY KEY (`id`));
