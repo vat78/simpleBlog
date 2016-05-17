@@ -2,11 +2,10 @@ package ru.vat78.simpleBlog.controller;
 
 import org.junit.Test;
 import org.springframework.ui.ModelMap;
-import ru.vat78.simpleBlog.database.DatabaseService;
+import ru.vat78.simpleBlog.services.DatabaseService;
 import ru.vat78.simpleBlog.model.Post;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 

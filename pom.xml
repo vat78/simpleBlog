@@ -130,7 +130,7 @@
             <version>2.9.3</version>
         </dependency>
 
-        <!-- To map JodaTime with database type -->
+        <!-- To map JodaTime with services type -->
         <dependency>
             <groupId>org.jadira.usertype</groupId>
             <artifactId>usertype.core</artifactId>
