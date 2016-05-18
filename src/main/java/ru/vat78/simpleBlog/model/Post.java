@@ -40,9 +40,43 @@ public class Post {
     @NotNull
     @DateTimeFormat(pattern="dd/MM/yyyy")
     @Column(name = "created_on", nullable = false)
-    //@Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
+    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
     private Date created;
 
 
+    public int getId() {
+        return id;
+    }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
 }

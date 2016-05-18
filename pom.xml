@@ -13,7 +13,7 @@
         <spring.version>4.2.6.RELEASE</spring.version>
         <javax.servlet>3.1.0</javax.servlet>
         <hibernate.version>5.1.0.Final</hibernate.version>
-        <mysql.connector.version>6.0.2</mysql.connector.version>
+        <mysql.connector.version>5.1.22</mysql.connector.version>
         <apache.log4j>2.5</apache.log4j>
         <junit.version>4.12</junit.version>
         <mockito.version>2.0.52-beta</mockito.version>
@@ -120,6 +120,20 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.9.4</version>
+            <scope>test</scope>
+        </dependency>
+
+
+        <dependency>
+            <groupId>javax.el</groupId>
+            <artifactId>javax.el-api</artifactId>
+            <version>3.0.0</version>
+            <scope>test</scope>
+        </dependency>
 
         <!-- Other dependencies -->
 

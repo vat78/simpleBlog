@@ -13,7 +13,6 @@ public interface PostsDao {
 
     void deletePostById(int id);
 
-    List<Post> getRecentPosts(int conut);
+    List<Post> getRecentPosts(int count);
 
-    List<Post> getPostsByAuthor(User author);
 }

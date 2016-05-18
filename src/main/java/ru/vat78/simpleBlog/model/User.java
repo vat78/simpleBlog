@@ -30,4 +30,39 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy="author")
     private List<Post> userPosts;
 
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public List<Post> getUserPosts() {
+        return userPosts;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
 }
