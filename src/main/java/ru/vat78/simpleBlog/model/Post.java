@@ -2,8 +2,6 @@ package ru.vat78.simpleBlog.model;
 
 
 import org.hibernate.annotations.Type;
-import org.joda.time.LocalDate;
-import org.joda.time.LocalDateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -40,7 +38,6 @@ public class Post {
     @NotNull
     @DateTimeFormat(pattern="dd/MM/yyyy")
     @Column(name = "created_on", nullable = false)
-    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
     private Date created;
 
 
