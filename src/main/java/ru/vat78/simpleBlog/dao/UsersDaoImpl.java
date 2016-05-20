@@ -1,9 +1,11 @@
 package ru.vat78.simpleBlog.dao;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import ru.vat78.simpleBlog.model.User;
 
 @Repository("usersDao")
+@Transactional(readOnly = false)
 public class UsersDaoImpl extends AbstractDao implements UsersDao {
 
     public void saveUser(User user) {
@@ -19,7 +21,7 @@ public class UsersDaoImpl extends AbstractDao implements UsersDao {
         getSession().delete(user);
     }
 
-    private User getUserById(int id) {
+    public User getUserById(int id) {
         return getSession().get(User.class, id);
     }
 }

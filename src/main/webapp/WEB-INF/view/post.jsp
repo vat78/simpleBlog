@@ -17,9 +17,9 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="/resources/img/favicon.ico">
+    <link rel="icon" href="../../favicon.ico">
 
-    <title>Simple blog</title>
+    <title><c:out value="${post.title}" /></title>
 
     <!-- Bootstrap core CSS -->
     <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
@@ -46,7 +46,7 @@
 <div class="blog-masthead">
     <div class="container">
         <nav class="blog-nav">
-            <a class="blog-nav-item active" href="#">Home</a>
+            <a class="blog-nav-item active" href="../">Home</a>
             <a class="blog-nav-item" href="#">New features</a>
             <a class="blog-nav-item" href="#">Press</a>
             <a class="blog-nav-item" href="#">New hires</a>
@@ -58,43 +58,35 @@
 <div class="container">
 
     <div class="blog-header">
-        <h1 class="blog-title">Простой блог на Java</h1>
-        <p class="lead blog-description">The official example template of creating a blog with Bootstrap.</p>
+        <h1 class="blog-title">
+            <c:out value="${post.title}" />
+        </h1>
+
+        <s:url value="/users?id={userName}" var="user_url">
+            <s:param name="userName" value="${post.author.id}" />
+        </s:url>
+
+
+        <p class="lead blog-description">
+            <c:out value="${post.created}" />
+            by <a href="${user_url}">
+                <c:out value="${post.author.fullName}" />
+            </a>
+        </p>
     </div>
 
     <div class="row">
 
         <div class="col-sm-8 blog-main">
 
-            <c:forEach var="post" items="${posts}">
-                
-                <s:url value="/users?id={userName}" var="user_url">
-                    <s:param name="userName" value="${post.author.id}" />
-                </s:url>
+            <p> <c:out value="${post.text}" /></p>
 
-                <s:url value="/posts?id={postId}" var="post_id">
-                    <s:param name="postId" value="${post.id}" />
-                </s:url>
-
-
-                <div class="blog-post">
-                    <h2 class="blog-post-title">
-                        <a href="${post_id}">
-                            <c:out value="${post.title}" />
-                        </a>
-                    </h2>
-                    <p class="blog-post-meta">
-                        <c:out value="${post.created}" />
-                        by <a href="${user_url}">
-                            <c:out value="${post.author.fullName}" />
-                        </a>
-                    </p>
-
-                    <p> <c:out value="${post.text}" /></p>
-                </div><!-- /.blog-post -->
-
-            </c:forEach>
-
+            <nav>
+                <ul class="pager">
+                    <li><a href="#">Previous</a></li>
+                    <li><a href="#">Next</a></li>
+                </ul>
+            </nav>
 
         </div><!-- /.blog-main -->
 

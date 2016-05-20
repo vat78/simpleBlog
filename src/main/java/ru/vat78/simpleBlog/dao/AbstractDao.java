@@ -11,6 +11,6 @@ public abstract class AbstractDao {
     private SessionFactory sessionFactory;
 
     protected Session getSession(){
-        return sessionFactory.getCurrentSession();
+        return sessionFactory.openSession();
     }
 }

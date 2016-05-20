@@ -3,11 +3,13 @@ package ru.vat78.simpleBlog.dao;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Order;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import ru.vat78.simpleBlog.model.Post;
 
 import java.util.List;
 
 @Repository("postsDao")
+@Transactional(readOnly = false)
 public class PostsDaoImpl extends AbstractDao implements PostsDao{
 
     public Post findById(int id) {
