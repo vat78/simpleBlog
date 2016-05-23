@@ -17,7 +17,7 @@ public class User {
     private int id;
 
     @Size(min=3, max=50)
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, unique = true)
     public String name;
 
     @Size(min=3, max=50)
