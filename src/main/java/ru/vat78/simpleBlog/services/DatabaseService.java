@@ -17,4 +17,12 @@ public interface DatabaseService {
     void savePost(Post post);
 
     void checkAdmin();
+
+    User getUserById(int userId);
+
+    List<User> getAllUsers();
+
+    boolean saveUser(User user);
+
+    void deleteUserById(int userId);
 }

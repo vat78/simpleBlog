@@ -6,6 +6,7 @@ import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import javax.persistence.criteria.Predicate;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.List;
 
@@ -14,18 +15,23 @@ import java.util.List;
  */
 
 @Entity
-@Table(name="users")
+@Table(name="users", uniqueConstraints=
+    @UniqueConstraint(columnNames={"name","password"}))
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Size(min=3, max=50)
+    @Size(min=3, max=50,
+        message = "User name must be at least 3 characters long")
+    @Pattern(regexp="^[a-zA-Z0-9]+$",
+            message="Username must be alphanumeric with no spaces")
     @Column(name = "name", nullable = false, unique = true)
     private String name;
 
-    @Size(min=3, max=50)
+    @Size(min=3, max=50,
+            message="The password must be at least 3 characters long.")
     @Column(name = "password", nullable = false)
     private String password;
 
@@ -35,7 +41,7 @@ public class User {
     @Column(name="is_admin")
     private boolean admin = false;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy="author")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="author")
     private List<Post> userPosts;
 
     public int getId() {

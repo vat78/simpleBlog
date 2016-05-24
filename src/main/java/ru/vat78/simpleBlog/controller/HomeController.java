@@ -26,7 +26,7 @@ public class HomeController {
 
         makeFakeData();
         map.addAttribute("posts",blogService.getLastPosts(5));
-        String userName = blogService.getLastPosts(5).get(1).getAuthor().getName();
+        //String userName = blogService.getLastPosts(5).get(1).getAuthor().getName();
         return "index";
     }
 

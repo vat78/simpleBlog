@@ -39,4 +39,25 @@ public class HibernateDataService implements DatabaseService {
             users.saveUser(admin);
         }
     }
+
+    public User getUserById(int userId){
+        return users.getUserById(userId);
+    }
+
+    public List<User> getAllUsers() {
+        return users.getAllUsers();
+    }
+
+    public boolean saveUser(User user){
+        try{
+            users.saveUser(user);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public void deleteUserById(int userId) {
+        users.deleteUserById(userId);
+    }
 }

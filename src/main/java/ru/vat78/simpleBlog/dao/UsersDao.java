@@ -2,6 +2,8 @@ package ru.vat78.simpleBlog.dao;
 
 import ru.vat78.simpleBlog.model.User;
 
+import java.util.List;
+
 public interface UsersDao {
 
     void saveUser(User user);
@@ -10,6 +12,7 @@ public interface UsersDao {
 
     User getUserById(int id);
 
-    public User findByUsername(String username);
+    User findByUsername(String username);
 
+    List<User> getAllUsers();
 }

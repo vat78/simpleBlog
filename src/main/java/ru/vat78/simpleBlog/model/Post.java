@@ -27,7 +27,7 @@ public class Post {
     private String title;
 
     @NotNull
-    @ManyToOne(cascade= {CascadeType.REFRESH}, fetch=FetchType.LAZY)
+    @ManyToOne(cascade= {CascadeType.REFRESH}, fetch = FetchType.EAGER)
     @JoinColumn(name="user_id")
     private User author;
 

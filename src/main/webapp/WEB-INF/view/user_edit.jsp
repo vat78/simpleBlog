@@ -1,13 +1,14 @@
 <%--
   Created by IntelliJ IDEA.
   User: vat
-  Date: 12.05.16
-  Time: 10:27
+  Date: 24.05.16
+  Time: 10:59
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
 <html lang="en">
 <head>
@@ -19,7 +20,7 @@
     <meta name="author" content="">
     <link rel="icon" href="/resources/img/favicon.ico">
 
-    <title>Blog of <c:out value="${user.fullName}" /></title>
+    <title>Edit user</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
@@ -59,79 +60,94 @@
 
     <div class="blog-header">
         <h1 class="blog-title">
-            <c:out value="${user.fullName}" />
         </h1>
-        <p class="lead blog-description">Posts of  <c:out value="${user.fullName}" />:</p>
+        <p class="lead blog-description">
+
+            <c:if test="${user.name} == ''">
+                Create user
+            </c:if>
+
+            <c:if test="${user.name} != ''">
+                Edit user <c:out value="${user.fullName}" />:</p>
+            </c:if>
+
     </div>
 
     <div class="row">
 
         <div class="col-sm-8 blog-main">
 
-            <c:forEach var="post" items="${posts}">
-                
-                <s:url value="/users?id={userName}" var="user_url">
-                    <s:param name="userName" value="${post.author.id}" />
-                </s:url>
+            <sf:form method="POST" modelAttribute="user">
+                <fieldset>
 
-                <s:url value="/posts?id={postId}" var="post_id">
-                    <s:param name="postId" value="${post.id}" />
-                </s:url>
+                    <table cellpadding="0">
 
-                <div class="blog-post">
-                    <h2 class="blog-post-title">
-                        <a href="${post_id}">
-                            <c:out value="${post.title}" />
-                        </a>
-                    </h2>
-                    <p class="blog-post-meta">
-                        <c:out value="${post.created}" />
-                        by <a href="${user_url}">
-                            <c:out value="${post.author.fullName}" />
-                        </a>
-                    </p>
+                        <tr>
+                            <th>
+                                <label for="user_name">User name:</label>
+                            </th>
+                            <td>
+                                <sf:input path="id" type="hidden" id="user_id"/>
+                                <sf:input path="name" maxlength="50" size="50" id="user_name" /><br/>
+                                <small><sf:errors path="name" type="text.error" /></small>
+                            </td>
+                        </tr>
 
-                    <p> <c:out value="${post.text}" /></p>
-                </div><!-- /.blog-post -->
+                        <tr>
+                            <th>
+                                <label for="user_password">Password:</label>
+                            </th>
+                            <td>
+                                <sf:password path="password" maxlength="50" size="50" id="user_password" /><br/>
+                                <small><sf:errors path="password" type="text.error" /></small>
+                            </td>
+                        </tr>
 
-            </c:forEach>
+                        <tr>
+                            <th>
+                                <label for="user_fullname">Full name:</label>
+                            </th>
+                            <td>
+                                <sf:input path="fullName" size="50" id="user_fullname" />
+                            </td>
+                        </tr>
 
-            <nav>
-                <ul class="pager">
-                    <li><a href="#">Previous</a></li>
-                    <li><a href="#">Next</a></li>
-                </ul>
-            </nav>
+                        <tr>
+                            <th>
+                                <label for="user_admin">Admin rights:</label>
+                            </th>
+                            <td>
+                                <sf:checkbox path="admin" id="user_admin" />
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th></th>
+                            <td>
+                                <sf:button id="save" name="save">
+                                    Save
+                                </sf:button>
+                            </td>
+                        </tr>
+
+                    </table>
+                </fieldset>
+            </sf:form>
+
 
         </div><!-- /.blog-main -->
 
         <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
-            <div class="sidebar-module">
-                <h4>Actions</h4>
-                <ol class="list-unstyled">
-                    <li><a href="/users?edit=${user.id}">Edit account</a></li>
-                    <li><a href="#" onClick="deleteConfirm();">Delete account</a></li>
-                </ol>
+            <div class="sidebar-module sidebar-module-inset">
+                <h4>About</h4>
+                <p>Fill all fields for create/edit user.</p>
             </div>
-
             <div class="sidebar-module">
-                <h4>Archives</h4>
-                <ol class="list-unstyled">
-                    <li><a href="#">March 2014</a></li>
-                    <li><a href="#">February 2014</a></li>
-                    <li><a href="#">January 2014</a></li>
-                    <li><a href="#">December 2013</a></li>
-                    <li><a href="#">November 2013</a></li>
-                    <li><a href="#">October 2013</a></li>
-                    <li><a href="#">September 2013</a></li>
-                    <li><a href="#">August 2013</a></li>
-                    <li><a href="#">July 2013</a></li>
-                    <li><a href="#">June 2013</a></li>
-                    <li><a href="#">May 2013</a></li>
-                    <li><a href="#">April 2013</a></li>
-                </ol>
-            </div>
 
+            </div>
+            <div class="sidebar-module">
+
+            </div>
         </div><!-- /.blog-sidebar -->
 
     </div><!-- /.row -->
@@ -154,13 +170,6 @@
 <script src="/resources/js/bootstrap.min.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="/resources/js/ie10-viewport-bug-workaround.js"></script>
-<script>
-    function deleteConfirm() {
-        if (confirm("Are you shure?"))
-        {
-            top.location.href="/users?delete=${user.id}"
-        }
-    }
-</script>
+
 </body>
 </html>

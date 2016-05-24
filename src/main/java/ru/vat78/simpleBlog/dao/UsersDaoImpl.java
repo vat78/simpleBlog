@@ -3,18 +3,23 @@ package ru.vat78.simpleBlog.dao;
 
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import ru.vat78.simpleBlog.model.User;
 import ru.vat78.simpleBlog.services.UsersRepository;
 
 import java.util.List;
 
+@Transactional
 @Repository("usersDao")
 public class UsersDaoImpl extends AbstractDao implements UsersDao, UsersRepository {
 
     public void saveUser(User user) {
         Session session = getSession();
-        session.persist(user);
-        session.flush();
+        if (user.getId() == 0) {
+            session.persist(user);
+        } else {
+            session.merge(user);
+        }
     }
 
     public void deleteUserById(int id) {
@@ -34,11 +39,17 @@ public class UsersDaoImpl extends AbstractDao implements UsersDao, UsersReposito
         Session session = getSession();
         List<User> users = session.createCriteria(User.class,"name = " + username).list();
         if (users.size()>0) {
-            return users.get(1);
+            return users.get(0);
         } else {
             return null;
         }
+    }
 
+    public List<User> getAllUsers() {
+
+        Session session = getSession();
+        List<User> users = session.createCriteria(User.class,"id > 0").list();
+        return users;
     }
 
     public <S extends User> S save(S s) {

@@ -4,8 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.Test;
 import ru.vat78.simpleBlog.model.User;
 
-import static org.junit.Assert.*;
-
 public class UsersDaoImplTest extends EntityDaoImplTest {
 
     private int id;
