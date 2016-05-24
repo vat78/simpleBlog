@@ -24,8 +24,13 @@ public class DbSecurityService implements UserDetailsService {
 
         try {
             User client = users.findByUsername(userName);
-            user = new org.springframework.security.core.userdetails.User(client.getName(),
-                    client.getPassword(), DummyAuthority.getAuth());
+            if (client.isAdmin()) {
+                user = new org.springframework.security.core.userdetails.User(client.getName(),
+                        client.getPassword(), AdminAuthority.getAuth());
+            } else {
+                user = new org.springframework.security.core.userdetails.User(client.getName(),
+                        client.getPassword(), DummyAuthority.getAuth());
+            }
 
         } catch (Exception problem) {
             throw new UsernameNotFoundException(problem.getMessage(),problem);
@@ -45,6 +50,20 @@ public class DbSecurityService implements UserDetailsService {
 
         public String getAuthority() {
             return "USER";
+        }
+    }
+
+    static class AdminAuthority implements GrantedAuthority {
+
+        static Collection<GrantedAuthority> getAuth()
+        {
+            List<GrantedAuthority> res = new ArrayList(1);
+            res.add(new DummyAuthority());
+            return res;
+        }
+
+        public String getAuthority() {
+            return "ADMIN";
         }
     }
 }

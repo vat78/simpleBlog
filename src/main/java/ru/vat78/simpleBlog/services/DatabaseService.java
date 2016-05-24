@@ -15,4 +15,6 @@ public interface DatabaseService {
     void createNewUser(User user);
 
     void savePost(Post post);
+
+    void checkAdmin();
 }

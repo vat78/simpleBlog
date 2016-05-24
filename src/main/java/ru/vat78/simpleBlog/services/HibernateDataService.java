@@ -29,4 +29,14 @@ public class HibernateDataService implements DatabaseService {
     public void savePost(Post post) {
         posts.savePost(post);
     }
+
+    public void checkAdmin() {
+        if (users.findByUsername("admin") == null) {
+            User admin = new User();
+            admin.setName("admin");
+            admin.setPassword("admin");
+            admin.setAdmin(true);
+            users.saveUser(admin);
+        }
+    }
 }

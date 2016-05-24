@@ -32,6 +32,10 @@ public class HomeController {
 
     private void makeFakeData() {
 
+
+        blogService.checkAdmin();
+
+        /*
         if (blogService.getLastPosts(5).size() < 1) {
             User testUser = new User();
             testUser.setName("vasya");
@@ -45,8 +49,9 @@ public class HomeController {
             newPost.setTitle("Test post");
             newPost.setCreated(new Date(System.currentTimeMillis()));
             newPost.setText("flkdg dfgkl jfds dsflgj ';gdfj ';fdg ;ljfd;gs ");
-            blogService.savePost(newPost);
+            //blogService.savePost(newPost);
         }
+        */
     }
 
 

@@ -22,6 +22,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/home").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .and()
+                .rememberMe()
+                .key("SimpleBlog")
+                .tokenValiditySeconds(2419200)
+                .and()
 
                 .formLogin()
                 .loginPage("/login")
@@ -29,6 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .permitAll();
+
     }
 
     @Autowired

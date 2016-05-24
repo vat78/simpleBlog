@@ -1,6 +1,11 @@
 package ru.vat78.simpleBlog.model;
 
+import org.hibernate.annotations.FilterDef;
+import org.hibernate.annotations.ParamDef;
+import org.hibernate.annotations.Where;
+
 import javax.persistence.*;
+import javax.persistence.criteria.Predicate;
 import javax.validation.constraints.Size;
 import java.util.List;
 
@@ -18,14 +23,17 @@ public class User {
 
     @Size(min=3, max=50)
     @Column(name = "name", nullable = false, unique = true)
-    public String name;
+    private String name;
 
     @Size(min=3, max=50)
     @Column(name = "password", nullable = false)
-    public String password;
+    private String password;
 
     @Column(name = "full_name")
-    public String fullName;
+    private String fullName;
+
+    @Column(name="is_admin")
+    private boolean admin = false;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy="author")
     private List<Post> userPosts;
@@ -66,4 +74,9 @@ public class User {
         this.fullName = fullName;
     }
 
+    public boolean isAdmin() {return admin;}
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
+    }
 }

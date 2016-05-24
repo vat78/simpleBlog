@@ -19,6 +19,7 @@ public class UsersController {
     @Autowired
     UsersDao users;
 
+    //@RequestMapping(value="/users/{username}", method=RequestMethod.GET)
     @RequestMapping(value="/users", method = RequestMethod.GET)
     public String userInfo(@RequestParam("id") int userId, Model model){
 
