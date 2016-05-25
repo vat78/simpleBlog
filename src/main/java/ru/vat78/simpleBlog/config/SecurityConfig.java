@@ -12,7 +12,7 @@ import ru.vat78.simpleBlog.services.DbSecurityService;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+//@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
@@ -20,16 +20,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/", "/home").permitAll()
-                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
                 .and()
-                .rememberMe()
-                .key("SimpleBlog")
-                .tokenValiditySeconds(2419200)
-                .and()
+                //.rememberMe()
+                //.key("SimpleBlog")
+                //.tokenValiditySeconds(2419200)
+                //.and()
 
                 .formLogin()
                 .loginPage("/login")
+                .defaultSuccessUrl("/")
+                .failureUrl("/login?error")
                 .permitAll()
+                .defaultSuccessUrl("/", false)
                 .and()
                 .logout()
                 .permitAll();
@@ -42,5 +45,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(dbSecurityService);
+        //auth.inMemoryAuthentication()
+        //        .withUser("user").password("user").roles("USER").and()
+        //        .withUser("admin").password("admin").roles("USER", "ADMIN");
     }
 }

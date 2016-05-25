@@ -1,6 +1,7 @@
 package ru.vat78.simpleBlog.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +27,6 @@ public class HomeController {
 
         makeFakeData();
         map.addAttribute("posts",blogService.getLastPosts(5));
-        //String userName = blogService.getLastPosts(5).get(1).getAuthor().getName();
         return "index";
     }
 

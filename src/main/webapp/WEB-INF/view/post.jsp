@@ -62,7 +62,7 @@
             <c:out value="${post.title}" />
         </h1>
 
-        <s:url value="/users?id={userName}" var="user_url">
+        <s:url value="/users/{userName}" var="user_url">
             <s:param name="userName" value="${post.author.id}" />
         </s:url>
 

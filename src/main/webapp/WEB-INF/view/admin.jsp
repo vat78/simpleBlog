@@ -58,37 +58,50 @@
     <div class="container">
 
         <div class="blog-header">
-            <h1 class="blog-title">Список пользователей блога</h1>
-            <p class="lead blog-description">Для редактирования пользователя, перейдите на его страницу.</p>
+            <h1 class="blog-title">List of users</h1>
+            <p class="lead blog-description">You may visit user's page for editing his account.</p>
         </div>
 
         <div class="row">
 
             <div class="col-sm-8 blog-main">
 
-                <c:forEach var="user" items="${users}">
+                <div class="blog-post">
 
-                    <s:url value="/users?id={userName}" var="user_url">
-                        <s:param name="userName" value="${user.id}" />
-                    </s:url>
+                    <p class="blog-post-meta">
 
-                    <div class="blog-post">
+                        <table width="100%" cellspacing="20px">
 
-                        <p class="blog-post-meta">
-                            <a href="${user_url}">
-                                user:<c:out value="${user.fullName}" />
-                            </a>
-                            &nbsp; &nbsp;
-                            <c:if test="${user.admin}">
-                                (admin)
-                            </c:if>
+                        <tr border-spacing="10">
+                            <th text-align="center">User</th>
+                            <th text-align="center">Role</th>
+                        </tr>
+                        <c:forEach var="user" items="${users}">
 
-                        </p>
+                            <tr>
+                            <s:url value="/users/{userName}" var="user_url">
+                                <s:param name="userName" value="${user.id}" />
+                            </s:url>
 
-                    </div><!-- /.blog-post -->
+                                <td>
+                                    <a href="${user_url}">
+                                        <c:out value="${user.fullName}" />
+                                    </a>
+                                </td>
+                                <td>
+                                    <c:if test="${user.admin}">
+                                        ADMIN
+                                    </c:if>
+                                </td>
+                            </tr>
 
+                        </c:forEach>
 
-                </c:forEach>
+                        </table>
+                    </p>
+
+                </div><!-- /.blog-post -->
+
 
             </div><!-- /.blog-main -->
 

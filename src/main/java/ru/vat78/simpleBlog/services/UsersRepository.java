@@ -6,5 +6,5 @@ import ru.vat78.simpleBlog.model.User;
 
 public interface UsersRepository extends CrudRepository<User, Integer> {
 
-    User findByUsername(String username);
+    User findByUserName(String name);
 }

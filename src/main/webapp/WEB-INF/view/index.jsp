@@ -58,7 +58,7 @@
 <div class="container">
 
     <div class="blog-header">
-        <h1 class="blog-title">Простой блог на Java</h1>
+        <h1 class="blog-title">Simple blog on Java</h1>
         <p class="lead blog-description">The official example template of creating a blog with Bootstrap.</p>
     </div>
 
@@ -68,7 +68,7 @@
 
             <c:forEach var="post" items="${posts}">
                 
-                <s:url value="/users?id={userName}" var="user_url">
+                <s:url value="/users/{userName}" var="user_url">
                     <s:param name="userName" value="${post.author.id}" />
                 </s:url>
 

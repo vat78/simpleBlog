@@ -11,7 +11,7 @@ import java.util.List;
 
 @Transactional
 @Repository("usersDao")
-public class UsersDaoImpl extends AbstractDao implements UsersDao, UsersRepository {
+public class UsersDaoImpl extends AbstractDao implements UsersDao{
 
     public void saveUser(User user) {
         Session session = getSession();
