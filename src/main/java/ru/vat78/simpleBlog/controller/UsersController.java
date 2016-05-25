@@ -30,7 +30,6 @@ public class UsersController {
     DatabaseService blogService;
 
     @RequestMapping(value="/users/{userId}", method=RequestMethod.GET)
-    //@RequestMapping(value="/users", params="id", method = RequestMethod.GET)
     public String userInfo(@PathVariable int userId, Model model){
 
         User user = blogService.getUserById(userId);
@@ -69,13 +68,13 @@ public class UsersController {
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.POST)
-    public String saveUserFromFrom(@Valid User user, BindingResult bindingResult){
+    public String saveUserFromForm(@Valid User user, BindingResult bindingResult){
 
         if (bindingResult.hasErrors()) {
             return "user_edit";
         }
         if (blogService.saveUser(user)) {
-            return "redirect:/users?id=" + user.getId();
+            return "redirect:/users/" + user.getId();
         } else {
             bindingResult.rejectValue("name", "error.user", "User already exists");
             return "user_edit";

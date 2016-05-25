@@ -35,7 +35,6 @@ public class Post {
     @Column
     private String text;
 
-    @NotNull
     @DateTimeFormat(pattern="dd/MM/yyyy")
     @Column(name = "created_on", nullable = false)
     private Date created;

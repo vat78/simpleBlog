@@ -44,6 +44,8 @@ public class HibernateDataService implements DatabaseService {
         return users.getUserById(userId);
     }
 
+    public User getUserByName(String name) {return users.findByUsername(name);}
+
     public List<User> getAllUsers() {
         return users.getAllUsers();
     }
@@ -59,5 +61,11 @@ public class HibernateDataService implements DatabaseService {
 
     public void deleteUserById(int userId) {
         users.deleteUserById(userId);
+    }
+
+    public Post getPostById(int postId) {return posts.findById(postId);}
+
+    public void deletePostById(int postId) {
+        posts.deletePostById(postId);
     }
 }

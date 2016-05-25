@@ -1,13 +1,14 @@
 <%--
   Created by IntelliJ IDEA.
   User: vat
-  Date: 12.05.16
-  Time: 10:27
+  Date: 24.05.16
+  Time: 10:59
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
 <html lang="en">
 <head>
@@ -19,7 +20,7 @@
     <meta name="author" content="">
     <link rel="icon" href="/resources/img/favicon.ico">
 
-    <title>Simple blog</title>
+    <title>Edit post</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
@@ -46,8 +47,8 @@
 <div class="blog-masthead">
     <div class="container">
         <nav class="blog-nav">
-            <a class="blog-nav-item active" href="/">Home</a>
-            <a class="blog-nav-item" href="/posts?new">New post</a>
+            <a class="blog-nav-item active" href="../">Home</a>
+            <a class="blog-nav-item" href="#">New features</a>
             <a class="blog-nav-item" href="#">Press</a>
             <a class="blog-nav-item" href="#">New hires</a>
             <a class="blog-nav-item" href="#">About</a>
@@ -58,42 +59,62 @@
 <div class="container">
 
     <div class="blog-header">
-        <h1 class="blog-title">Simple blog on Java</h1>
-        <p class="lead blog-description">The official example template of creating a blog with Bootstrap.</p>
+        <h1 class="blog-title">
+        </h1>
+        <p class="lead blog-description">
+
+            <c:if test="${post.title} == ''">
+                Create new post
+            </c:if>
+
+            <c:if test="${post.title} != ''">
+                Edit post <c:out value="${post.title}" />:</p>
+            </c:if>
+
     </div>
 
     <div class="row">
 
         <div class="col-sm-8 blog-main">
 
-            <c:forEach var="post" items="${posts}">
-                
-                <s:url value="/users/{userName}" var="user_url">
-                    <s:param name="userName" value="${post.author.id}" />
-                </s:url>
+            <sf:form method="POST" modelAttribute="post">
+                <fieldset>
 
-                <s:url value="/posts/{postId}" var="post_id">
-                    <s:param name="postId" value="${post.id}" />
-                </s:url>
+                    <table cellpadding="0">
 
+                        <tr>
+                            <th>
+                                <label for="post_title">Title:</label>
+                            </th>
+                            <td>
+                                <sf:input path="id" type="hidden" id="post_id"/>
+                                <sf:input path="author.id" type="hidden" id="post_author"/>
+                                <sf:input path="title" maxlength="250" size="50" id="post_title" /><br/>
+                                <small><sf:errors path="title" type="text.error" /></small>
+                            </td>
+                        </tr>
 
-                <div class="blog-post">
-                    <h2 class="blog-post-title">
-                        <a href="${post_id}">
-                            <c:out value="${post.title}" />
-                        </a>
-                    </h2>
-                    <p class="blog-post-meta">
-                        <c:out value="${post.created}" />
-                        by <a href="${user_url}">
-                            <c:out value="${post.author.fullName}" />
-                        </a>
-                    </p>
+                        <tr>
+                            <th>
+                                <label for="post_text">Text:</label>
+                            </th>
+                            <td>
+                                <sf:textarea path="text" width="100%" rows="15" id="post_text" />
+                            </td>
+                        </tr>
 
-                    <p> <c:out value="${post.text}" /></p>
-                </div><!-- /.blog-post -->
+                        <tr>
+                            <th></th>
+                            <td>
+                                <sf:button id="save" name="save">
+                                    Save
+                                </sf:button>
+                            </td>
+                        </tr>
 
-            </c:forEach>
+                    </table>
+                </fieldset>
+            </sf:form>
 
 
         </div><!-- /.blog-main -->
@@ -101,32 +122,13 @@
         <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
             <div class="sidebar-module sidebar-module-inset">
                 <h4>About</h4>
-                <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+                <p>Fill all fields for create/edit user.</p>
             </div>
             <div class="sidebar-module">
-                <h4>Archives</h4>
-                <ol class="list-unstyled">
-                    <li><a href="#">March 2014</a></li>
-                    <li><a href="#">February 2014</a></li>
-                    <li><a href="#">January 2014</a></li>
-                    <li><a href="#">December 2013</a></li>
-                    <li><a href="#">November 2013</a></li>
-                    <li><a href="#">October 2013</a></li>
-                    <li><a href="#">September 2013</a></li>
-                    <li><a href="#">August 2013</a></li>
-                    <li><a href="#">July 2013</a></li>
-                    <li><a href="#">June 2013</a></li>
-                    <li><a href="#">May 2013</a></li>
-                    <li><a href="#">April 2013</a></li>
-                </ol>
+
             </div>
             <div class="sidebar-module">
-                <h4>Elsewhere</h4>
-                <ol class="list-unstyled">
-                    <li><a href="#">GitHub</a></li>
-                    <li><a href="#">Twitter</a></li>
-                    <li><a href="#">Facebook</a></li>
-                </ol>
+
             </div>
         </div><!-- /.blog-sidebar -->
 
@@ -150,5 +152,6 @@
 <script src="/resources/js/bootstrap.min.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="/resources/js/ie10-viewport-bug-workaround.js"></script>
+
 </body>
 </html>

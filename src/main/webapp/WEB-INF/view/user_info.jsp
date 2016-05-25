@@ -70,11 +70,11 @@
 
             <c:forEach var="post" items="${posts}">
                 
-                <s:url value="/users?id={userName}" var="user_url">
+                <s:url value="/users/{userName}" var="user_url">
                     <s:param name="userName" value="${post.author.id}" />
                 </s:url>
 
-                <s:url value="/posts?id={postId}" var="post_id">
+                <s:url value="/posts/{postId}" var="post_id">
                     <s:param name="postId" value="${post.id}" />
                 </s:url>
 

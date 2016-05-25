@@ -20,9 +20,15 @@ public interface DatabaseService {
 
     User getUserById(int userId);
 
+    User getUserByName(String name);
+
     List<User> getAllUsers();
 
     boolean saveUser(User user);
 
     void deleteUserById(int userId);
+
+    Post getPostById(int postId);
+
+    void deletePostById(int postId);
 }
