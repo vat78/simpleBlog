@@ -14,7 +14,7 @@ import ru.vat78.simpleBlog.model.User;
 import java.util.List;
 
 @Service
-public class DbSecurityService implements UserDetailsService {
+public class SecurityServiceUsesDB implements UserDetailsService {
 
     @Autowired
     UsersDao users;
