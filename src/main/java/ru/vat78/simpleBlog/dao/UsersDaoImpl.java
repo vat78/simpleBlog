@@ -5,7 +5,6 @@ import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.vat78.simpleBlog.model.User;
-import ru.vat78.simpleBlog.services.UsersRepository;
 
 import java.util.List;
 
