@@ -73,6 +73,7 @@ public class UsersController {
         if (bindingResult.hasErrors()) {
             return "user_edit";
         }
+
         if (blogService.saveUser(user)) {
             return "redirect:/users/" + user.getId();
         } else {

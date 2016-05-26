@@ -41,6 +41,8 @@
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.22" />
           <element id="library" level="project" name="Maven: javax.servlet.jsp:javax.servlet.jsp-api:2.3.1" />
           <element id="library" level="project" name="Maven: org.springframework.security:spring-security-web:4.1.0.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-acl:4.1.0.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-taglibs:4.1.0.RELEASE" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="simpleBlog/web/Web" />
