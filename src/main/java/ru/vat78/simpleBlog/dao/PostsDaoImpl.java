@@ -17,7 +17,7 @@ public class PostsDaoImpl extends AbstractDao implements PostsDao{
     }
 
     public void savePost(Post post) {
-        getSession().saveOrUpdate(post);
+        getSession().persist(post);
     }
 
     public void deletePostById(int id) {

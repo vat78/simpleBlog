@@ -98,10 +98,19 @@
         </div><!-- /.blog-main -->
 
         <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
-            <div class="sidebar-module sidebar-module-inset">
-                <h4>About</h4>
-                <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
-            </div>
+            <sec:authorize access="isAuthenticated()" >
+                <div class="sidebar-module">
+                    <h4>Actions</h4>
+                    <ol class="list-unstyled">
+                        <sec:authentication property="principal.username" var="loginId"/>
+                        <sec:authorize access="hasRole('ROLE_ADMIN') or ${loginId} == ${post.author.name}">
+                            <li><a href="/posts?edit=${post.id}">Edit post</a></li>
+                            <li><a href="#" onClick="deleteConfirm();">Delete post</a></li>
+                        </sec:authorize>
+                    </ol>
+                </div>
+            </sec:authorize>
+
             <div class="sidebar-module">
                 <h4>Archives</h4>
                 <ol class="list-unstyled">
@@ -149,5 +158,13 @@
 <script src="/resources/js/bootstrap.min.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="/resources/js/ie10-viewport-bug-workaround.js"></script>
+<script>
+    function deleteConfirm() {
+        if (confirm("Are you shure?"))
+        {
+            top.location.href="/posts?delete=${post.id}"
+        }
+    }
+</script>
 </body>
 </html>

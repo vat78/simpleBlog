@@ -113,13 +113,19 @@
         </div><!-- /.blog-main -->
 
         <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
-            <div class="sidebar-module">
-                <h4>Actions</h4>
-                <ol class="list-unstyled">
-                    <li><a href="/users?edit=${user.id}">Edit account</a></li>
-                    <li><a href="#" onClick="deleteConfirm();">Delete account</a></li>
-                </ol>
-            </div>
+
+            <sec:authorize access="isAuthenticated()" >
+                <div class="sidebar-module">
+                    <h4>Actions</h4>
+                    <ol class="list-unstyled">
+                        <sec:authentication property="principal.username" var="loginId"/>
+                        <sec:authorize access="hasRole('ROLE_ADMIN') or ${loginId} == ${user.name}">
+                            <li><a href="/users?edit=${user.id}">Edit account</a></li>
+                            <li><a href="#" onClick="deleteConfirm();">Delete account</a></li>
+                        </sec:authorize>
+                    </ol>
+                </div>
+            </sec:authorize>
 
             <div class="sidebar-module">
                 <h4>Archives</h4>

@@ -7,6 +7,7 @@ import ru.vat78.simpleBlog.dao.UsersDao;
 import ru.vat78.simpleBlog.model.Post;
 import ru.vat78.simpleBlog.model.User;
 
+import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -66,6 +67,14 @@ public class HibernateDataService implements DatabaseService {
     public Post getPostById(int postId) {return posts.findById(postId);}
 
     public void deletePostById(int postId) {
-        posts.deletePostById(postId);
+        User author = getUserById(getPostById(postId).getAuthor().getId());
+        Iterator<Post> iterator = author.getUserPosts().iterator();
+        while (iterator.hasNext()) {
+            if (iterator.next().getId() == postId) {
+                iterator.remove();
+            }
+        }
+        users.saveUser(author);
+        //posts.deletePostById(postId);
     }
 }

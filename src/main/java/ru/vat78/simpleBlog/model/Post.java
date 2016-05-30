@@ -22,17 +22,18 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Size(min=3, max=50)
+    @Size(min=2, max=250)
     @Column(name = "title", nullable = false)
     private String title;
 
     @NotNull
-    @ManyToOne(cascade= {CascadeType.REFRESH}, fetch = FetchType.EAGER)
+    @ManyToOne(cascade= {CascadeType.REFRESH})
     @JoinColumn(name="user_id")
     private User author;
 
     @NotNull
-    @Column
+    @Lob
+    @Column()
     private String text;
 
     @DateTimeFormat(pattern="dd/MM/yyyy")

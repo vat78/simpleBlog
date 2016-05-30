@@ -2,6 +2,7 @@ package ru.vat78.simpleBlog.dao;
 
 
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.vat78.simpleBlog.model.User;
@@ -36,7 +37,7 @@ public class UsersDaoImpl extends AbstractDao implements UsersDao{
     public User findByUsername(String username) {
 
         Session session = getSession();
-        List<User> users = session.createCriteria(User.class,"name = " + username).list();
+        List<User> users = session.createCriteria(User.class).add(Restrictions.eq("name", username)).list();
         if (users.size()>0) {
             return users.get(0);
         } else {
