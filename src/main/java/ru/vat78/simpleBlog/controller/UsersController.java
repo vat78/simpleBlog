@@ -26,15 +26,22 @@ import java.util.List;
 @Controller
 public class UsersController {
 
+    private final static int PAGE_SIZE = 5;
+
     @Autowired
     DatabaseService blogService;
 
     @RequestMapping(value="/users/{userId}", method=RequestMethod.GET)
-    public String userInfo(@PathVariable int userId, Model model){
+    public String userInfo(@PathVariable int userId, @RequestParam(required = false) Integer page, Model model){
 
+        if (page == null) page = 0;
         User user = blogService.getUserById(userId);
         model.addAttribute("user", user);
-        model.addAttribute("posts", user.getUserPosts());
+        model.addAttribute("posts", blogService.getPostsByAuthor(user,page,PAGE_SIZE));
+
+        boolean hasNext = (page+1) * PAGE_SIZE < blogService.getPostsCount(user);
+        model.addAttribute("hasNext", hasNext);
+        model.addAttribute("hasPrevious", page>0);
         return "user_info";
     }
 

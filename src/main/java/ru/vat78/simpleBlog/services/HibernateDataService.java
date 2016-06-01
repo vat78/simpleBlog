@@ -20,15 +20,15 @@ public class HibernateDataService implements DatabaseService {
     PostsDao posts;
 
     public List<Post> getLastPosts(int count) {
-        return posts.getRecentPosts(count);
+        return posts.getRecentPosts(0, count);
     }
 
     public void createNewUser(User user) {
-        users.saveUser(user);
+        users.add(user);
     }
 
     public void savePost(Post post) {
-        posts.savePost(post);
+        posts.save(post);
     }
 
     public void checkAdmin() {
@@ -37,23 +37,23 @@ public class HibernateDataService implements DatabaseService {
             admin.setName("admin");
             admin.setPassword("admin");
             admin.setAdmin(true);
-            users.saveUser(admin);
+            users.save(admin);
         }
     }
 
     public User getUserById(int userId){
-        return users.getUserById(userId);
+        return users.findById(userId);
     }
 
     public User getUserByName(String name) {return users.findByUsername(name);}
 
     public List<User> getAllUsers() {
-        return users.getAllUsers();
+        return users.getAll();
     }
 
     public boolean saveUser(User user){
         try{
-            users.saveUser(user);
+            users.save(user);
             return true;
         } catch (Exception e) {
             return false;
@@ -61,20 +61,25 @@ public class HibernateDataService implements DatabaseService {
     }
 
     public void deleteUserById(int userId) {
-        users.deleteUserById(userId);
+        users.deleteById(userId);
     }
 
     public Post getPostById(int postId) {return posts.findById(postId);}
 
     public void deletePostById(int postId) {
-        User author = getUserById(getPostById(postId).getAuthor().getId());
-        Iterator<Post> iterator = author.getUserPosts().iterator();
-        while (iterator.hasNext()) {
-            if (iterator.next().getId() == postId) {
-                iterator.remove();
-            }
-        }
-        users.saveUser(author);
-        //posts.deletePostById(postId);
+        Post post = posts.findById(postId);
+        posts.delete(post);
+    }
+
+    public List<Post> getPostsByAuthor(User author, int page, int pageSize){
+        return posts.getPostsByUser(author.getId(), page, pageSize);
+    }
+
+    public int getPostsCount() {
+        return posts.getCount();
+    }
+
+    public int getPostsCount(User author) {
+        return posts.getPostsCountByUser(author.getId());
     }
 }

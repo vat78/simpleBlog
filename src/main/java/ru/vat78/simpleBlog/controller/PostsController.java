@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.vat78.simpleBlog.model.Post;
+import ru.vat78.simpleBlog.model.User;
 import ru.vat78.simpleBlog.services.DatabaseService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +26,7 @@ public class PostsController {
     @RequestMapping(value = "/posts/{postId}", method = RequestMethod.GET)
     public String showPost(@PathVariable int postId, Model model){
 
-        model.addAttribute("post",blogService.getPostById(postId));
+        model.addAttribute("post", blogService.getPostById(postId));
         return "post";
     }
 
@@ -34,8 +35,8 @@ public class PostsController {
     public String createPost(HttpServletRequest request, Model model){
 
         Post newPost = new Post();
-        newPost.setAuthor(blogService.getUserByName(
-                request.getUserPrincipal().getName()));
+        User user = blogService.getUserByName(request.getUserPrincipal().getName());
+        newPost.setAuthor(user);
         model.addAttribute("post", newPost);
         return "post_edit";
     }
@@ -44,15 +45,13 @@ public class PostsController {
     public String editPost(@RequestParam("edit") int postId, HttpServletRequest request, Model model){
 
         Post post = blogService.getPostById(postId);
-        if (post != null &&
-                (request.isUserInRole("ROLE_ADMIN") ||
-                 request.getUserPrincipal().getName() == post.getAuthor().getName())) {
-
-            model.addAttribute("post", post);
-            return "post_edit";
-        } else {
-            return "redirect:/posts/" + postId;
+        if (post != null) {
+            if (request.isUserInRole("ROLE_ADMIN") || getCurrentUser(request).equals(post.getAuthor().getName())) {
+                model.addAttribute("post", post);
+                return "post_edit";
+            }
         }
+        return "redirect:/posts/" + postId;
     }
 
     @RequestMapping(value = "/posts", method = RequestMethod.POST)
@@ -70,12 +69,15 @@ public class PostsController {
     public String deletePost(@RequestParam("delete") int postId, HttpServletRequest request, Model model){
 
         Post post = blogService.getPostById(postId);
-        if (post != null &&
-                (request.isUserInRole("ROLE_ADMIN") ||
-                        request.getUserPrincipal().getName() == post.getAuthor().getName())) {
-            blogService.deletePostById(postId);
-        }
+        if (post != null)
+            if (request.isUserInRole("ROLE_ADMIN") || getCurrentUser(request).equals(post.getAuthor().getName()))
+                blogService.deletePostById(postId);
+
         return "redirect:/";
+    }
+
+    private String getCurrentUser(HttpServletRequest request){
+        return request.getUserPrincipal().getName();
     }
 
 }

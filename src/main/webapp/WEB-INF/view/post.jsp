@@ -103,7 +103,7 @@
                     <h4>Actions</h4>
                     <ol class="list-unstyled">
                         <sec:authentication property="principal.username" var="loginId"/>
-                        <sec:authorize access="hasRole('ROLE_ADMIN') or ${loginId} == ${post.author.name}">
+                        <sec:authorize access="hasRole('ROLE_ADMIN') or '${loginId}' == '${post.author.name}'">
                             <li><a href="/posts?edit=${post.id}">Edit post</a></li>
                             <li><a href="#" onClick="deleteConfirm();">Delete post</a></li>
                         </sec:authorize>

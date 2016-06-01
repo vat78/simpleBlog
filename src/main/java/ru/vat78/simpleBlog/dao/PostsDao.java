@@ -9,10 +9,17 @@ public interface PostsDao {
 
     Post findById(int id);
 
-    void savePost(Post post);
+    void save(Post post);
 
-    void deletePostById(int id);
+    void add(Post post);
 
-    List<Post> getRecentPosts(int count);
+    void delete(Post post);
 
+    List<Post> getRecentPosts(int page, int pageSize);
+
+    List<Post> getPostsByUser(int userId, int page, int pageSize);
+
+    int getCount();
+
+    int getPostsCountByUser(int userId);
 }

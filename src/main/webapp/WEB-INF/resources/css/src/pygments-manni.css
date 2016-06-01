@@ -31,7 +31,7 @@
 .nc { color: #00AA88; } /* Name.Class */
 .no { color: #336600 } /* Name.Constant */
 .nd { color: #9999FF } /* Name.Decorator */
-.ni { color: #999999; } /* Name.Entity */
+.ni { color: #999999; } /* Name.DBEntity */
 .ne { color: #CC0000; } /* Name.Exception */
 .nf { color: #CC00FF } /* Name.Function */
 .nl { color: #9999FF } /* Name.Label */

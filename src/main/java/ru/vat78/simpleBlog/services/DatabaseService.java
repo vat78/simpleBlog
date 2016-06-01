@@ -12,6 +12,12 @@ public interface DatabaseService {
 
     List<Post> getLastPosts(int count);
 
+    List<Post> getPostsByAuthor(User author, int page, int pageSize);
+
+    int getPostsCount();
+
+    int getPostsCount(User author);
+
     void createNewUser(User user);
 
     void savePost(Post post);

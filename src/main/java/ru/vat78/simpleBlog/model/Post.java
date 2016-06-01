@@ -1,7 +1,6 @@
 package ru.vat78.simpleBlog.model;
 
 
-import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -16,7 +15,7 @@ import java.util.Date;
 
 @Entity
 @Table(name="posts")
-public class Post {
+public class Post implements DBEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +27,7 @@ public class Post {
 
     @NotNull
     @ManyToOne(cascade= {CascadeType.REFRESH})
-    @JoinColumn(name="user_id")
+    @JoinColumn(name="user_id", referencedColumnName = "id")
     private User author;
 
     @NotNull
@@ -40,9 +39,12 @@ public class Post {
     @Column(name = "created_on", nullable = false)
     private Date created;
 
-
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {

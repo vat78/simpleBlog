@@ -15,7 +15,7 @@ public class UsersDaoImplTest extends EntityDaoImplTest {
     public void saveUser() throws Exception {
 
         User user = getTestUser();
-        usersDao.saveUser(user);
+        usersDao.save(user);
         id = user.getId();
     }
 
