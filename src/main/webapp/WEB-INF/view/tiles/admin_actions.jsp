@@ -4,12 +4,7 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
-
-            <p> <c:out value="${post.text}" /></p>
-
-            <nav>
-                <ul class="pager">
-                    <li><a href="#">Previous</a></li>
-                    <li><a href="#">Next</a></li>
-                </ul>
-            </nav>
+    <h4>Actions</h4>
+    <ol class="list-unstyled">
+        <li><a href="/users?new">Create user</a></li>
+    </ol>

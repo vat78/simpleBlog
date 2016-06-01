@@ -27,7 +27,7 @@ public class HomeController {
 
         makeFakeData();
         map.addAttribute("posts",blogService.getLastPosts(5));
-        return "index";
+        return "home";
     }
 
     private void makeFakeData() {

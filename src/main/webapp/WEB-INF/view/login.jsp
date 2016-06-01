@@ -1,15 +1,7 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: vat
-  Date: 24.05.16
-  Time: 15:56
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
-<html>
-<body onload='document.login.username.focus();'>
 
 <s:url var="authUrl" value="/j_spring_security_check" />
 <h3>Please login</h3>
@@ -37,5 +29,4 @@
     </fieldset>
 </form>
 <csrf disabled="true"/>
-</body>
-</html>
+

@@ -42,7 +42,7 @@ public class UsersController {
         boolean hasNext = (page+1) * PAGE_SIZE < blogService.getPostsCount(user);
         model.addAttribute("hasNext", hasNext);
         model.addAttribute("hasPrevious", page>0);
-        return "user_info";
+        return "user";
     }
 
     @RequestMapping(value="/users", params="new", method = RequestMethod.GET)

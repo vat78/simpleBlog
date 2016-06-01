@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+
+    <definition name="main-template" template="/WEB-INF/view/tiles/index.jsp">
+
+        <put-attribute name="title" value="Simple blog" />
+        <put-attribute name="header" value="" />
+        <put-attribute name="menu" value="/WEB-INF/view/tiles/menu.jsp" />
+        <put-attribute name="content" value="" />
+        <put-attribute name="right-top" value="/WEB-INF/view/tiles/home_desc.jsp" />
+        <put-attribute name="right-bottom" value="" />
+        <put-attribute name="footer" value="/WEB-INF/view/tiles/footer.jsp" />
+
+    </definition>
+
+    <definition name="home" extends="main-template">
+
+        <put-attribute name="header" value="/WEB-INF/view/tiles/home_header.jsp" />
+        <put-attribute name="content" value="/WEB-INF/view/home_content.jsp" />
+
+    </definition>
+
+    <definition name="user" extends="main-template">
+
+        <put-attribute name="header" value="/WEB-INF/view/tiles/user_header.jsp" />
+        <put-attribute name="content" value="/WEB-INF/view/user.jsp" />
+        <put-attribute name="right-top" value="/WEB-INF/view/tiles/user_actions.jsp" />
+
+    </definition>
+
+    <definition name="post" extends="main-template">
+
+        <put-attribute name="header" value="/WEB-INF/view/tiles/post_header.jsp" />
+        <put-attribute name="content" value="/WEB-INF/view/post.jsp" />
+        <put-attribute name="right-top" value="/WEB-INF/view/tiles/post_actions.jsp" />
+
+    </definition>
+
+    <definition name="login" extends="main-template">
+
+        <put-attribute name="header" value="" />
+        <put-attribute name="content" value="/WEB-INF/view/login.jsp" />
+
+    </definition>
+
+    <definition name="user_edit" extends="main-template">
+
+        <put-attribute name="header" value="/WEB-INF/view/tiles/user_edit_header.jsp" />
+        <put-attribute name="content" value="/WEB-INF/view/user_edit.jsp" />
+
+    </definition>
+
+    <definition name="post_edit" extends="main-template">
+
+        <put-attribute name="header" value="/WEB-INF/view/tiles/post_edit_header.jsp" />
+        <put-attribute name="content" value="/WEB-INF/view/post_edit.jsp" />
+
+    </definition>
+
+    <definition name="admin" extends="main-template">
+
+        <put-attribute name="header" value="/WEB-INF/view/tiles/admin_header.jsp" />
+        <put-attribute name="content" value="/WEB-INF/view/admin.jsp" />
+        <put-attribute name="right-top" value="/WEB-INF/view/tiles/admin_actions.jsp" />
+
+    </definition>
+
+</tiles-definitions>
